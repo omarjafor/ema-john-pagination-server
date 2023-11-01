@@ -50,6 +50,13 @@ async function run() {
     app.post('/productByIds', async(req, res) => {
       const ids = req.body;
       const idsWithObjectId = ids.map(id => new ObjectId(id))
+      const query = {
+        _id: {
+          $in: idsWithObjectId
+        }
+      }
+      const result = await productCollection.find(query).toArray();
+      res.send(result)
     })
 
     // Send a ping to confirm a successful connection
