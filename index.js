@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -49,7 +49,7 @@ async function run() {
 
     app.post('/productByIds', async(req, res) => {
       const ids = req.body;
-      console.log(ids);
+      const idsWithObjectId = ids.map(id => new ObjectId(id))
     })
 
     // Send a ping to confirm a successful connection
